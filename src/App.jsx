@@ -771,18 +771,21 @@ function AliveBookingButton({ href }) {
     return next;
   };
 
-  const handleMouseEnter = () => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-
-    // Disable evasion on mobile/touch devices to prevent glitching
-    if (window.matchMedia("(hover: none)").matches || window.innerWidth < 768) {
-      return;
+  const handleEvade = (e) => {
+    // If it's a touch event, optionally prevent the default click so they actually have to chase it
+    if (e.type === 'touchstart' && escapeCount < 2) {
+      e.preventDefault();
     }
 
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
     if (escapeCount < 2) {
-      // Logic to physically escape the cursor, constrained so it stays on screen
-      const randomX = (Math.random() - 0.5) * 500; // ±250px max
-      const randomY = (Math.random() - 0.5) * 250; // ±125px max
+      // Calculate dynamic boundaries so the button stays fully within the screen on mobile devices
+      const safeX = Math.min(250, (window.innerWidth / 2) - 100);
+      const safeY = Math.min(125, (window.innerHeight / 2) - 50);
+
+      const randomX = (Math.random() - 0.5) * (safeX * 2); 
+      const randomY = (Math.random() - 0.5) * (safeY * 2); 
       const randomRot = (Math.random() - 0.5) * 60;
       
       gsap.to(buttonRef.current, { 
@@ -856,7 +859,8 @@ function AliveBookingButton({ href }) {
         target="_blank" 
         rel="noopener noreferrer" 
         onClick={handleClick}
-        onMouseEnter={handleMouseEnter}
+        onMouseEnter={handleEvade}
+        onTouchStart={handleEvade}
         className={cn(
           "bg-text text-background px-10 py-5 rounded-full font-sans font-bold text-xl flex items-center gap-3 transition-colors relative z-10 shadow-2xl block",
           escapeCount >= 3 ? "hover:bg-text/90 cursor-pointer" : "cursor-default drop-shadow-[0_0_15px_rgba(250,248,245,0.4)]"
