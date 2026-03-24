@@ -1,4 +1,4 @@
-# How to Deploy Nitro-Gen to the Internet
+# How to Deploy HABOMIC to the Internet
 
 The absolute easiest, fastest, and most professional way to host a modern React (Vite) application like this is using a service called **Vercel**. It is free, built specifically for frameworks like yours, and takes about 5 minutes.
 
@@ -10,7 +10,7 @@ Here is the step-by-step guide.
 Vercel works by connecting to your code repository.
 1. Go to [github.com](https://github.com/) and create a free account.
 2. Once logged in, click the **"+"** icon in the top right and select **New repository**.
-3. Name it `nitro-gen-website`.
+3. Name it `habomic-website`.
 4. Keep it **Private** or **Public** (your choice).
 5. Click **Create repository**.
 6. Leave that tab open; we'll need it in Step 2.
@@ -30,10 +30,10 @@ git init
 git add .
 
 # Save your first version
-git commit -m "Initial commit of Nitro-Gen Cinematic Site"
+git commit -m "Initial commit of HABOMIC Cinematic Site"
 
 # Connect your local folder to GitHub (Replace 'YOUR_USERNAME' with your actual GitHub username)
-git remote add origin https://github.com/YOUR_USERNAME/nitro-gen-website.git
+git remote add origin https://github.com/YOUR_USERNAME/habomic-website.git
 
 # Push the code up to the internet
 git branch -M main
@@ -44,15 +44,15 @@ git push -u origin main
 ### Step 3: Deploy on Vercel
 1. Go to [vercel.com](https://vercel.com/) and sign up for a free account. **Important:** Sign up using the "Continue with GitHub" button.
 2. Once logged into the Vercel dashboard, click **Add New...** and select **Project**.
-3. You will see a list of your GitHub repositories. Find `nitro-gen-website` and click **Import**.
+3. You will see a list of your GitHub repositories. Find `habomic-website` and click **Import**.
 4. You don't need to change *any* of the settings on the next screen. Vercel automatically detects that you are using Vite and React.
 5. Click the big **Deploy** button.
 
 ### That's it! 🚀
-Vercel will now spend about 30 seconds building your app. Once it’s done, you will get a live `.vercel.app` URL (e.g., `nitro-gen-website.vercel.app`) that you can immediately send to anyone in the world.
+Vercel will now spend about 30 seconds building your app. Once it’s done, you will get a live `.vercel.app` URL (e.g., `habomic-website.vercel.app`) that you can immediately send to anyone in the world.
 
 ### Step 4 (Optional): Add Your Custom Domain
-If you own `nitro-gen.com` (or similar), you can link it easily:
+If you own `habomic.com` (or similar), you can link it easily:
 1. In your Vercel project dashboard, click **Settings**.
 2. Go to **Domains**.
 3. Type in your custom domain and click **Add**.
