@@ -25,13 +25,7 @@ export default function App() {
 
   return (
     <div ref={containerRef} className="relative w-full min-h-screen">
-      {/* Global SVG Noise Overlay */}
-      <svg className="noise-overlay fixed inset-0 w-full h-full pointer-events-none z-50 opacity-5">
-        <filter id="noiseFilter">
-          <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
-        </filter>
-        <rect width="100%" height="100%" filter="url(#noiseFilter)" />
-      </svg>
+
 
       <Navbar />
       <main>
@@ -116,7 +110,7 @@ function HeroSection() {
     <section ref={heroRef} className="relative w-full h-[100dvh] flex flex-col justify-end p-6 md:p-16 lg:p-24 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img
-          src="/hero-nascar.jpg"
+          src="/hero-nascar-final.png"
           alt="NASCAR Pit Crew inside Corporate Office Metaphor"
           className="w-full h-full object-cover object-center"
         />
@@ -125,8 +119,8 @@ function HeroSection() {
       </div>
 
       <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-start gap-6 pb-12">
-        {/* Soft, targeted gradient behind text to make "Business chaos meets" pop cleanly */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-background/90 via-background/60 to-transparent blur-xl -m-8 rounded-full" />
+        {/* Soft, targeted fog behind text to ensure crisp readability against the high-quality image */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-background via-background/80 to-transparent blur-3xl -m-16 rounded-[4rem] opacity-90 pointer-events-none" />
 
         <div className="flex flex-col gap-2 relative z-10">
           <h1 ref={title1Ref} className="font-sans font-bold text-3xl md:text-5xl lg:text-6xl text-text tracking-tight drop-shadow-md">
@@ -779,6 +773,11 @@ function AliveBookingButton({ href }) {
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+    // Disable evasion on mobile/touch devices to prevent glitching
+    if (window.matchMedia("(hover: none)").matches || window.innerWidth < 768) {
+      return;
+    }
 
     if (escapeCount < 2) {
       // Logic to physically escape the cursor, constrained so it stays on screen
