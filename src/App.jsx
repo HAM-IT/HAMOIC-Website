@@ -32,6 +32,7 @@ export default function App() {
         <HeroSection />
         <FeaturesSection />
         <PhilosophySection />
+        <ToolsSection />
         <ProtocolSection />
         <GetStartedSection />
       </main>
@@ -71,7 +72,7 @@ function Navbar() {
       </div>
 
       <nav className="hidden md:flex items-center gap-8">
-        {['Process', 'Manifesto', 'Protocol'].map((link) => (
+        {['Process', 'Manifesto', 'Tools', 'Protocol'].map((link) => (
           <a key={link} href={`#${link.toLowerCase()}`} className="text-sm font-medium text-text/70 hover:text-text transition-colors hover:-translate-y-px duration-300">
             {link}
           </a>
@@ -632,6 +633,259 @@ function AIBotGraphic() {
   );
 }
 
+// ----------------------------------------------------------------------
+// TOOLS SECTION
+// ----------------------------------------------------------------------
+
+function ToolsSection() {
+  const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        headerRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
+          scrollTrigger: { trigger: headerRef.current, start: 'top 80%' }
+        }
+      );
+      gsap.fromTo(
+        cardRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1, y: 0, duration: 1.1, ease: 'power3.out', delay: 0.15,
+          scrollTrigger: { trigger: cardRef.current, start: 'top 80%' }
+        }
+      );
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section id="tools" ref={sectionRef} className="w-full py-32 px-6 md:px-12 bg-[#050508] relative z-10 overflow-hidden">
+      {/* Banana‑glow ambient orb */}
+      <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%)' }} />
+
+      <div className="max-w-6xl mx-auto flex flex-col gap-16">
+
+        {/* Header */}
+        <div ref={headerRef} className="flex flex-col gap-4 max-w-2xl">
+          <h3 className="font-sans text-accent font-semibold tracking-wide uppercase text-sm flex items-center gap-2">
+            🍌 Monkey Tools
+          </h3>
+          <h2 className="font-serif italic text-4xl md:text-6xl text-text leading-tight">
+            Tools built by monkeys,<br />
+            <span className="text-accent">for humans.</span>
+          </h2>
+          <p className="text-text/50 text-lg max-w-lg leading-relaxed">
+            Habomic builds AI-powered utilities to remove friction from your daily workflows. Below are the tools currently available.
+          </p>
+        </div>
+
+        {/* Tool Card — MonkeyFill */}
+        <div ref={cardRef} className="relative">
+          <MonkeyFillCard />
+        </div>
+
+        {/* Coming Soon Tease */}
+        <div className="flex items-center gap-4">
+          <div className="flex gap-3">
+            {['Monkey CRM Sync', 'Monkey Report Killer', 'Monkey Inbox Zero'].map((name) => (
+              <div key={name} className="border border-muted/40 rounded-full px-4 py-2 text-xs font-mono text-text/30 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-muted/40 inline-block" />
+                {name} — Soon
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+function MonkeyFillCard() {
+  const [hovered, setHovered] = useState(false);
+
+  const features = [
+    { icon: '🎯', label: 'CV ↔ Job matching', desc: 'AI reads the job offer and rewrites your CV to match it precisely.' },
+    { icon: '⚡', label: 'One-click PDF export', desc: 'Generates a clean, recruiter-ready PDF directly in your browser.' },
+    { icon: '🔒', label: 'Privacy-first', desc: 'Nothing is stored. Your data never leaves your session.' },
+    { icon: '🍌', label: '5 free uses / day', desc: 'Try it daily, no account needed during the beta.' },
+  ];
+
+  return (
+    <div
+      className="relative rounded-[2.5rem] border border-muted/60 bg-surface overflow-hidden shadow-2xl transition-all duration-500"
+      style={{
+        boxShadow: hovered
+          ? '0 0 80px -20px rgba(201,168,76,0.35), 0 25px 60px -15px rgba(0,0,0,0.7)'
+          : '0 25px 60px -15px rgba(0,0,0,0.6)'
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Banana stripe accent */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-accent to-transparent opacity-80" />
+
+      <div className="flex flex-col lg:flex-row">
+
+        {/* LEFT — Info */}
+        <div className="flex-1 p-10 md:p-14 flex flex-col gap-8 justify-between">
+          <div className="flex flex-col gap-5">
+            {/* App identity */}
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center text-3xl shadow-inner">
+                🐒
+              </div>
+              <div>
+                <div className="flex items-center gap-3">
+                  <h3 className="font-sans font-bold text-2xl text-text">MonkeyFill</h3>
+                  <span className="font-mono text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full bg-accent/20 text-accent border border-accent/30">
+                    Beta
+                  </span>
+                </div>
+                <p className="text-text/40 text-sm font-mono">Chrome Extension · by Habomic</p>
+              </div>
+            </div>
+
+            {/* Description */}
+            <p className="text-text/70 text-lg leading-relaxed max-w-lg">
+              Stop sending the same generic CV. MonkeyFill reads any job posting and rebuilds your CV to match — tailored, sharp, and recruiter-ready in seconds.
+            </p>
+
+            {/* Feature grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
+              {features.map((f) => (
+                <div key={f.label} className="flex items-start gap-3 p-4 rounded-2xl bg-background/60 border border-muted/40 hover:border-accent/30 transition-colors duration-300">
+                  <span className="text-xl mt-0.5">{f.icon}</span>
+                  <div>
+                    <p className="font-sans font-semibold text-sm text-text">{f.label}</p>
+                    <p className="text-text/45 text-xs mt-0.5 leading-snug">{f.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-2">
+            <a
+              href="https://github.com/HAM-IT/MonkeyFill-Extention/releases/latest"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-3 bg-accent text-background px-7 py-3.5 rounded-full font-sans font-bold text-base hover:bg-accent/90 transition-all duration-300 shadow-lg hover:shadow-accent/30 hover:-translate-y-0.5 active:scale-95"
+            >
+              <span>🍌 Download Beta</span>
+              <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+            </a>
+            <p className="text-text/35 text-xs font-mono leading-relaxed">
+              Free · Chrome · No account required
+            </p>
+          </div>
+
+          {/* Beta disclaimer */}
+          <div className="flex items-start gap-2.5 p-4 rounded-2xl border border-muted/30 bg-background/40">
+            <span className="text-base mt-0.5">⚠️</span>
+            <p className="text-text/40 text-xs leading-relaxed">
+              MonkeyFill is in public beta. Expect rough edges — and feel free to send feedback. A premium tier is coming soon with unlimited daily uses.
+            </p>
+          </div>
+        </div>
+
+        {/* RIGHT — Animated Preview */}
+        <div className="lg:w-[420px] border-t lg:border-t-0 lg:border-l border-muted/40 bg-[#09090D]/80 flex items-center justify-center p-10 relative overflow-hidden min-h-[400px]">
+          <MonkeyFillPreview />
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+function MonkeyFillPreview() {
+  const containerRef = useRef(null);
+  const [step, setStep] = useState(0);
+
+  const steps = [
+    { label: 'Reading job offer...', color: '#C9A84C', icon: '📄' },
+    { label: 'Analysing your CV...', color: '#7B9EE0', icon: '🧠' },
+    { label: 'Tailoring content...', color: '#C9A84C', icon: '✍️' },
+    { label: 'PDF ready!', color: '#4CAF80', icon: '✅' },
+  ];
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setStep((s) => (s + 1) % steps.length);
+    }, 1800);
+    return () => clearInterval(id);
+  }, []);
+
+  const current = steps[step];
+
+  return (
+    <div ref={containerRef} className="w-full flex flex-col items-center gap-6">
+      {/* Mock extension popup */}
+      <div className="w-[220px] rounded-2xl border border-muted/50 bg-[#13131A] overflow-hidden shadow-2xl">
+        {/* Popup header */}
+        <div className="flex items-center gap-2 px-4 py-3 border-b border-muted/30 bg-[#09090D]">
+          <span className="text-base">🐒</span>
+          <span className="font-sans font-bold text-sm text-text">MonkeyFill</span>
+          <span className="ml-auto text-[9px] font-mono text-accent/70 border border-accent/20 px-1.5 py-0.5 rounded-full">BETA</span>
+        </div>
+
+        {/* Status line */}
+        <div className="px-4 py-4 flex flex-col gap-3">
+          <div
+            className="flex items-center gap-2 rounded-xl px-3 py-2.5 transition-all duration-500"
+            style={{ backgroundColor: current.color + '18', border: `1px solid ${current.color}40` }}
+          >
+            <span className="text-base transition-all duration-300">{current.icon}</span>
+            <span className="font-mono text-[11px] transition-all duration-300" style={{ color: current.color }}>
+              {current.label}
+            </span>
+          </div>
+
+          {/* Progress dots */}
+          <div className="flex items-center justify-center gap-1.5 mt-1">
+            {steps.map((_, i) => (
+              <div
+                key={i}
+                className="rounded-full transition-all duration-400"
+                style={{
+                  width: i === step ? 16 : 6,
+                  height: 6,
+                  backgroundColor: i === step ? current.color : '#2A2A35'
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Mock CV lines */}
+          <div className="flex flex-col gap-1.5 mt-1">
+            {[100, 80, 90, 60, 75].map((w, i) => (
+              <div
+                key={i}
+                className="h-1.5 rounded-full transition-all duration-700"
+                style={{
+                  width: `${w}%`,
+                  backgroundColor: i <= step ? current.color + '60' : '#2A2A35',
+                  opacity: i <= step ? 1 : 0.4
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <p className="text-text/30 text-xs font-mono text-center">Live demo simulation</p>
+    </div>
+  );
+}
+
 function GetStartedSection() {
   return (
     <section className="w-full py-40 px-6 bg-background relative z-20 flex flex-col items-center justify-center text-center">
@@ -666,7 +920,7 @@ function Footer() {
         <div className="flex gap-16">
           <div className="flex flex-col gap-4">
             <span className="font-mono text-xs text-text/40 uppercase tracking-widest">Navigation</span>
-            {['Process', 'Manifesto', 'Protocol'].map((link) => (
+            {['Process', 'Manifesto', 'Tools', 'Protocol'].map((link) => (
               <a key={link} href={`#${link.toLowerCase()}`} className="text-sm text-text/70 hover:text-accent transition-colors">{link}</a>
             ))}
           </div>
