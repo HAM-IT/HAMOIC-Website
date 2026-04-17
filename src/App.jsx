@@ -677,11 +677,11 @@ function ToolsSection() {
             🍌 Monkey Tools
           </h3>
           <h2 className="font-serif italic text-4xl md:text-6xl text-text leading-tight">
-            Primal Instincts,<br />
-            <span className="text-accent">Artificial Intelligence.</span>
+            Built by humans.<br />
+            <span className="text-accent">Run by AI.</span>
           </h2>
           <p className="text-text/50 text-lg max-w-lg leading-relaxed">
-            The "Monkey" is our analogy for agentic automation. Habomic builds AI-powered artifacts designed to handle the repetitive protocols of your business, removing noise and leaving only the results.
+            We deploy our 'monkeys' into specialized utilities designed to strip the friction out of your daily workflows. Select an artifact below to begin.
           </p>
         </div>
 
