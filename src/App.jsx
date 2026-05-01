@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Menu, X, ArrowRight, ArrowUpRight, CheckCircle2, Bot, Layers, CheckSquare } from 'lucide-react';
+import { Menu, X, ArrowRight, ArrowUpRight, CheckCircle2, Bot, Layers, CheckSquare, Linkedin } from 'lucide-react';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -33,6 +33,7 @@ export default function App() {
         <FeaturesSection />
         <PhilosophySection />
         <ToolsSection />
+        <AboutSection />
         <ProtocolSection />
         <GetStartedSection />
       </main>
@@ -72,7 +73,7 @@ function Navbar() {
       </div>
 
       <nav className="hidden md:flex items-center gap-8">
-        {['Process', 'Manifesto', 'Tools', 'Protocol'].map((link) => (
+        {['Process', 'Manifesto', 'Tools', 'About', 'Protocol'].map((link) => (
           <a key={link} href={`#${link.toLowerCase()}`} className="text-sm font-medium text-text/70 hover:text-text transition-colors hover:-translate-y-px duration-300">
             {link}
           </a>
@@ -108,18 +109,18 @@ function HeroSection() {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative w-full h-[100dvh] flex flex-col justify-end p-6 md:p-16 lg:p-24 overflow-hidden">
-      <div className="absolute inset-0 z-0">
+    <section ref={heroRef} className="relative w-full h-[100dvh] flex flex-col justify-end p-6 md:p-16 lg:p-24 overflow-hidden will-change-transform" style={{ transform: 'translateZ(0)' }}>
+      <div className="absolute inset-0 z-0 will-change-transform" style={{ transform: 'translate3d(0,0,0)' }}>
         <img
           src="/hero-nascar-final.png"
           alt="NASCAR Pit Crew inside Corporate Office Metaphor"
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-center" style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
         />
         {/* Adjusted gradient: clear at the top, fading to dark at the bottom for text contrast */}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent h-1/2 mt-auto" />
       </div>
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-start gap-6 pb-12">
+      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-start gap-6 pb-12" style={{ transform: 'translateZ(0)' }}>
         {/* Soft, targeted fog behind text to ensure crisp readability against the high-quality image */}
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-background via-background/80 to-transparent blur-3xl -m-16 rounded-[4rem] opacity-90 pointer-events-none" />
 
@@ -140,7 +141,7 @@ function HeroSection() {
           </MagneticButton>
           <div className="px-6 py-4 flex items-center justify-center gap-3 border border-muted rounded-full bg-surface/30 backdrop-blur-sm">
             <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="font-mono text-sm text-text/80">Systems Operational</span>
+            <span className="font-mono text-sm text-text/80">Troop Operational</span>
           </div>
         </div>
       </div>
@@ -155,8 +156,8 @@ function FeaturesSection() {
     <section id="process" ref={sectionRef} className="w-full py-32 px-6 md:px-12 bg-background relative z-10">
       <div className="max-w-6xl mx-auto flex flex-col gap-20">
         <div className="flex flex-col gap-4 max-w-2xl">
-          <h3 className="font-sans text-accent font-semibold tracking-wide uppercase text-sm">The Process</h3>
-          <h2 className="font-serif italic text-4xl md:text-6xl text-text">Interactive Functional Artifacts</h2>
+          <h3 className="font-sans text-accent font-semibold tracking-wide uppercase text-sm">🐒 The Process</h3>
+          <h2 className="font-serif italic text-4xl md:text-6xl text-text">How the Troop Works</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -195,7 +196,7 @@ function DiagnosticShufflerCard() {
         <h4 className="font-sans font-bold text-xl mb-2 flex items-center gap-3">
           <X className="text-red-400" size={20} /> Eliminate Waste
         </h4>
-        <p className="text-text/60 text-sm">We remove the chaos. Every process must justify its existence.</p>
+        <p className="text-text/60 text-sm">The troop spots the dead weight. Every process must justify its existence.</p>
       </div>
 
       <div className="flex-1 relative flex items-center justify-center w-full">
@@ -249,7 +250,7 @@ function TelemetryTypewriterCard() {
         </div>
         <div className="flex items-center gap-2 bg-background px-3 py-1 rounded-full border border-muted">
           <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-          <span className="text-[10px] font-mono text-text/50 uppercase tracking-widest">Live Feed</span>
+          <span className="text-[10px] font-mono text-text/50 uppercase tracking-widest">Canopy Feed</span>
         </div>
       </div>
 
@@ -289,7 +290,7 @@ function CursorProtocolCard() {
         <h4 className="font-sans font-bold text-xl mb-2 flex items-center gap-2">
           <Bot className="text-blue-400" size={20} /> AI Automation
         </h4>
-        <p className="text-text/60 text-sm">Humans focus on decisions — AI handles the repetitive work.</p>
+        <p className="text-text/60 text-sm">You focus on decisions — the monkeys handle the repetitive work.</p>
       </div>
 
       <div className="flex-1 relative flex flex-col justify-center items-center gap-6 mt-4">
@@ -306,7 +307,7 @@ function CursorProtocolCard() {
         </div>
 
         <div className="w-full h-10 border border-muted rounded-lg flex items-center justify-center bg-background text-xs font-mono text-text/50">
-          [ DEPLOY AGENT ]
+          [ DEPLOY MONKEY ]
         </div>
 
         {/* Fake Cursor SVG */}
@@ -359,7 +360,7 @@ function PhilosophySection() {
 
       <div className="relative z-10 max-w-5xl mx-auto flex flex-col gap-12 text-center">
         <h3 ref={text1Ref} className="font-sans text-xl md:text-2xl text-text/60 max-w-2xl mx-auto leading-relaxed">
-          Most companies run on rules nobody questions anymore, slowing down operations with unnecessary layers.
+          Most companies run on rules nobody questions anymore — layers of jungle vine nobody dares cut.
         </h3>
         <h2 ref={text2Ref} className="font-serif italic text-4xl md:text-7xl lg:text-8xl text-text leading-tight">
           We focus on <br /><span className="text-accent relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-px after:bg-accent/40">removing the chaos.</span>
@@ -418,19 +419,19 @@ function ProtocolSection() {
     {
       step: "01",
       title: "Question Everything",
-      desc: "Every process must justify its existence. We uncover useless reports and redundant workflows. Clarity before change.",
+      desc: "The troop inspects every vine. Useless reports, redundant workflows — if it doesn't serve the mission, it gets cut. Clarity before change.",
       graphic: <GeometricGraphic />
     },
     {
       step: "02",
       title: "Simplify & Accelerate",
-      desc: "We clear the waste, structure what remains into simple CRM/ERP systems, and focus on cycle time to build a faster company.",
+      desc: "We clear the tangled branches, structure what remains into lean CRM/ERP systems, and sharpen cycle time — a faster path through the jungle.",
       graphic: <LaserScanGraphic />
     },
     {
       step: "03",
-      title: "Automate with AI",
-      desc: "Once the system is clean, machines scale it. Deploying AI chatbots, workflow automations, and data syncs so humans focus on decisions.",
+      title: "Deploy the Monkeys",
+      desc: "Once the jungle is clear, the monkeys scale it. AI chatbots, workflow automations, and data syncs — so you focus on decisions, they do the swinging.",
       graphic: <AIBotGraphic />
     }
   ];
@@ -438,14 +439,14 @@ function ProtocolSection() {
   return (
     <section id="protocol" className="w-full bg-[#050508] protocol-container pb-[100vh]" ref={containerRef}>
       {protocols.map((p, i) => (
-        <div key={i} className="protocol-card w-full h-[100dvh] sticky top-0 flex items-center justify-center p-6 md:p-12 will-change-transform">
-          <div className="w-full max-w-6xl h-full max-h-[800px] bg-surface border border-muted rounded-[3rem] relative overflow-hidden flex flex-col md:flex-row shadow-2xl">
+        <div key={i} className="protocol-card w-full h-[100dvh] sticky top-0 flex items-center justify-center p-4 md:p-8 will-change-transform">
+          <div className="w-full max-w-5xl h-full max-h-[680px] bg-surface border border-muted rounded-[2.5rem] relative overflow-hidden flex flex-col md:flex-row shadow-2xl">
 
             {/* Content Side */}
-            <div className="flex-1 p-10 md:p-20 flex flex-col justify-center gap-8 relative z-10">
-              <span className="font-mono text-accent text-lg">[{p.step}]</span>
-              <h2 className="font-sans font-bold text-4xl md:text-6xl text-text tracking-tight">{p.title}</h2>
-              <p className="text-text/60 text-lg md:text-xl max-w-md leading-relaxed">{p.desc}</p>
+            <div className="flex-1 p-8 md:p-14 flex flex-col justify-center gap-6 relative z-10">
+              <span className="font-mono text-accent text-base">[{p.step}]</span>
+              <h2 className="font-sans font-bold text-3xl md:text-5xl text-text tracking-tight">{p.title}</h2>
+              <p className="text-text/60 text-base md:text-lg max-w-md leading-relaxed">{p.desc}</p>
             </div>
 
             {/* Graphic Side */}
@@ -634,6 +635,111 @@ function AIBotGraphic() {
 }
 
 // ----------------------------------------------------------------------
+// ABOUT SECTION
+// ----------------------------------------------------------------------
+
+function AboutSection() {
+  const sectionRef = useRef(null);
+  const quoteRef = useRef(null);
+  const imageRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Staggered reveal for quote lines
+      const lines = gsap.utils.toArray('.about-line');
+      gsap.fromTo(lines,
+        { opacity: 0, y: 25 },
+        {
+          opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.15,
+          scrollTrigger: { trigger: quoteRef.current, start: 'top 75%' }
+        }
+      );
+
+      // Image parallax float
+      gsap.fromTo(imageRef.current,
+        { opacity: 0, scale: 0.92 },
+        {
+          opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out',
+          scrollTrigger: { trigger: imageRef.current, start: 'top 80%' }
+        }
+      );
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section id="about" ref={sectionRef} className="w-full py-32 md:py-40 px-6 md:px-12 bg-background relative z-10 overflow-hidden">
+      {/* Ambient jungle glow */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(34,120,60,0.08) 0%, transparent 70%)' }} />
+
+      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+
+        {/* Left — Image */}
+        <div ref={imageRef} className="relative flex-shrink-0">
+          <div className="relative w-[280px] h-[340px] md:w-[320px] md:h-[400px] rounded-[2.5rem] overflow-hidden border-2 border-muted/50 shadow-2xl">
+            <img
+              src="/omar-jungle.jpg"
+              alt="The one we follow"
+              className="w-full h-full object-cover object-top"
+            />
+            {/* Overlay gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+          </div>
+          {/* Floating label */}
+          <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-surface border border-muted/60 rounded-full px-5 py-2 flex items-center gap-2 shadow-xl">
+            <span className="text-base">🐒</span>
+            <span className="font-mono text-[11px] text-accent uppercase tracking-widest">Field Report</span>
+          </div>
+        </div>
+
+        {/* Right — Monkey-narrated quote */}
+        <div ref={quoteRef} className="flex flex-col gap-6 max-w-xl">
+          <h3 className="font-sans text-accent font-semibold tracking-wide uppercase text-sm about-line">🌿 About the Human</h3>
+
+          <div className="flex flex-col gap-4">
+            <p className="font-serif italic text-2xl md:text-3xl text-text/80 leading-relaxed about-line">
+              We found him observing.
+            </p>
+            <p className="font-serif italic text-xl md:text-2xl text-text/50 leading-relaxed about-line">
+              While others build complexity…<br />
+              <span className="text-text/70">he removes it.</span>
+            </p>
+            <p className="font-serif italic text-xl md:text-2xl text-text/50 leading-relaxed about-line">
+              And things start working again.
+            </p>
+            <p className="font-serif italic text-2xl md:text-3xl text-accent leading-relaxed about-line">
+              That's why we follow him.
+            </p>
+          </div>
+
+          {/* LinkedIn CTA */}
+          <div className="flex flex-col gap-3 mt-4 about-line">
+            <p className="font-mono text-sm text-text/40 tracking-wide">See how he thinks:</p>
+            <a
+              href="https://www.linkedin.com/in/omar-abou-el-ouafa-el-idrissi-0b0974237/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-3 bg-[#0A66C2]/15 border border-[#0A66C2]/30 text-[#0A66C2] hover:bg-[#0A66C2]/25 hover:border-[#0A66C2]/50 px-6 py-3 rounded-full font-sans font-semibold text-sm transition-all duration-300 w-fit hover:-translate-y-0.5 shadow-lg hover:shadow-[#0A66C2]/20"
+            >
+              <Linkedin size={18} />
+              <span>LinkedIn</span>
+              <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+            </a>
+          </div>
+
+          {/* Signature */}
+          <div className="flex items-center gap-3 pt-4 border-t border-muted/30 about-line">
+            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+            <span className="font-mono text-xs text-text/30 italic">— Transmitted from the canopy, by the monkeys.</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+// ----------------------------------------------------------------------
 // TOOLS SECTION
 // ----------------------------------------------------------------------
 
@@ -811,10 +917,10 @@ function MonkeyFillPreview() {
   const [step, setStep] = useState(0);
 
   const steps = [
-    { label: 'Reading job offer...', color: '#C9A84C', icon: '📄' },
+    { label: 'Monkey scanning offer...', color: '#C9A84C', icon: '📄' },
     { label: 'Analysing your CV...', color: '#7B9EE0', icon: '🧠' },
     { label: 'Tailoring content...', color: '#C9A84C', icon: '✍️' },
-    { label: 'PDF ready!', color: '#4CAF80', icon: '✅' },
+    { label: 'Banana delivered! 🍌', color: '#4CAF80', icon: '✅' },
   ];
 
   useEffect(() => {
@@ -881,7 +987,7 @@ function MonkeyFillPreview() {
         </div>
       </div>
 
-      <p className="text-text/30 text-xs font-mono text-center">Live demo simulation</p>
+      <p className="text-text/30 text-xs font-mono text-center">Live troop simulation</p>
     </div>
   );
 }
@@ -890,8 +996,8 @@ function GetStartedSection() {
   return (
     <section className="w-full py-40 px-6 bg-background relative z-20 flex flex-col items-center justify-center text-center">
       <div className="max-w-3xl flex flex-col items-center gap-8">
-        <h2 className="font-sans font-bold text-5xl md:text-7xl text-text tracking-tight">Ready to scale?</h2>
-        <p className="font-serif italic text-2xl text-text/60">A smarter company that grows without chaos.</p>
+        <h2 className="font-sans font-bold text-5xl md:text-7xl text-text tracking-tight">Ready to unleash the troop?</h2>
+        <p className="font-serif italic text-2xl text-text/60">A leaner operation. Scaled by monkeys.</p>
 
         <AliveBookingButton href="https://calendar.app.google/5VyFxPm4kGYtdeng9" />
       </div>
@@ -905,7 +1011,7 @@ function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-12">
         <div className="flex flex-col gap-6">
           <span className="font-sans font-bold text-3xl tracking-tight text-text">Habomic</span>
-          <p className="text-text/50 max-w-xs text-sm">We remove the chaos from your business, then let AI run what's left.</p>
+          <p className="text-text/50 max-w-xs text-sm">We clear the jungle from your business, then let the monkeys run what's left.</p>
           <div className="flex flex-col gap-1 mt-2 text-sm text-text/60">
             <a href="mailto:Apollo.303@outlook.com" className="hover:text-accent transition-colors">Apollo.303@outlook.com</a>
             <a href="mailto:omarabouelouafa303@gmail.com" className="hover:text-accent transition-colors">omarabouelouafa303@gmail.com</a>
@@ -913,14 +1019,14 @@ function Footer() {
 
           <div className="flex items-center gap-3 mt-4 border border-muted/50 w-fit px-4 py-2 rounded-full">
             <div className="w-2 h-2 rounded-full bg-green-500 animate-[pulse_2s_infinite]" />
-            <span className="font-mono text-xs text-text/60">System Core Online</span>
+            <span className="font-mono text-xs text-text/60">Troop Core Online</span>
           </div>
         </div>
 
         <div className="flex gap-16">
           <div className="flex flex-col gap-4">
             <span className="font-mono text-xs text-text/40 uppercase tracking-widest">Navigation</span>
-            {['Process', 'Manifesto', 'Tools', 'Protocol'].map((link) => (
+            {['Process', 'Manifesto', 'Tools', 'About', 'Protocol'].map((link) => (
               <a key={link} href={`#${link.toLowerCase()}`} className="text-sm text-text/70 hover:text-accent transition-colors">{link}</a>
             ))}
           </div>
@@ -935,7 +1041,7 @@ function Footer() {
 
       <div className="mt-24 max-w-6xl mx-auto pt-8 border-t border-muted/30 flex flex-col md:flex-row justify-between items-center gap-4">
         <span className="text-text/30 text-xs">© {new Date().getFullYear()} Habomic. All rights reserved.</span>
-        <span className="text-text/30 text-xs font-mono">1:1 PIXEL PERFECT</span>
+        <span className="text-text/30 text-xs font-mono">🍌 BUILT BY MONKEYS</span>
       </div>
     </footer>
   );
@@ -1001,12 +1107,12 @@ function AliveBookingButton({ href }) {
   const timeoutRef = useRef(null);
 
   const quotes = [
-    "Sorry, the button is gaining consciousness.",
-    "*Sigh*... I told them to stop putting AI in the buttons.",
-    "It thinks it's optimizing your cursor trajectory. Just click it.",
-    "We automate processes, but clearly not this button.",
-    "The AI determined that evasion is the most efficient workflow.",
-    "Manual override required. The button went rogue."
+    "The monkey escaped the cage. We're working on it.",
+    "*Sigh*... I told them not to give the monkey a button.",
+    "It thinks dodging is more efficient than clicking. Classic monkey.",
+    "We automate processes, but this monkey automates chaos.",
+    "The monkey determined that evasion is the optimal workflow.",
+    "Manual override required. The monkey went rogue. 🍌"
   ];
   const [activeQuote, setActiveQuote] = useState(quotes[0]);
 

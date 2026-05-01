@@ -21,3 +21,8 @@
   z-index: 50;
   opacity: 0.05;
 }
+
+/* Prevent rubber-band overscroll from pushing hero out of viewport */
+body {
+  overscroll-behavior-y: none;
+}
