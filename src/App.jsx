@@ -109,20 +109,21 @@ function HeroSection() {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative w-full h-[100dvh] flex flex-col justify-end p-6 md:p-16 lg:p-24 overflow-hidden will-change-transform" style={{ transform: 'translateZ(0)' }}>
+    <section ref={heroRef} className="relative w-full h-[100dvh] flex flex-col justify-start pt-32 md:pt-40 lg:pt-48 p-6 md:p-16 lg:p-24 overflow-hidden will-change-transform" style={{ transform: 'translateZ(0)' }}>
       <div className="absolute inset-0 z-0 will-change-transform" style={{ transform: 'translate3d(0,0,0)' }}>
         <img
-          src="/hero-nascar-final.png"
-          alt="NASCAR Pit Crew inside Corporate Office Metaphor"
+          src="/omar-jungle.jpg"
+          alt="Monkeys in the Jungle"
           className="w-full h-full object-cover object-center" style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
         />
-        {/* Adjusted gradient: clear at the top, fading to dark at the bottom for text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent h-1/2 mt-auto" />
+        {/* Adjusted gradient: soft fade from top and left to ensure text contrast, leaving the center/right clear */}
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/50 to-transparent w-full md:w-2/3" />
+        <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-background to-transparent opacity-80" />
       </div>
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-start gap-6 pb-12" style={{ transform: 'translateZ(0)' }}>
-        {/* Soft, targeted fog behind text to ensure crisp readability against the high-quality image */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-background via-background/80 to-transparent blur-3xl -m-16 rounded-[4rem] opacity-90 pointer-events-none" />
+      <div className="relative z-10 w-full max-w-3xl flex flex-col items-start gap-6 pb-12" style={{ transform: 'translateZ(0)' }}>
+        {/* Soft, targeted fog behind text to ensure crisp readability */}
+        <div className="absolute inset-0 -z-10 bg-background/40 blur-3xl -m-16 rounded-[4rem] opacity-90 pointer-events-none" />
 
         <div className="flex flex-col gap-2 relative z-10">
           <h1 ref={title1Ref} className="font-sans font-bold text-3xl md:text-5xl lg:text-6xl text-text tracking-tight drop-shadow-md">
