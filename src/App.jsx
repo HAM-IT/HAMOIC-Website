@@ -126,10 +126,10 @@ function HeroSection() {
 
         <div className="flex flex-col gap-2 relative z-10">
           <h1 ref={title1Ref} className="font-sans font-bold text-3xl md:text-5xl lg:text-6xl text-text tracking-tight drop-shadow-md">
-            Business chaos meets
+            AI where it matters.
           </h1>
           <h2 ref={title2Ref} className="font-serif italic text-6xl md:text-8xl lg:text-[9rem] text-accent leading-[0.85] tracking-tight pr-4 drop-shadow-lg">
-            Surgical precision.
+            Humans where it counts.
           </h2>
         </div>
 
@@ -360,7 +360,7 @@ function PhilosophySection() {
 
       <div className="relative z-10 max-w-5xl mx-auto flex flex-col gap-12 text-center">
         <h3 ref={text1Ref} className="font-sans text-xl md:text-2xl text-text/60 max-w-2xl mx-auto leading-relaxed">
-          Most companies run on rules nobody questions anymore — layers of jungle vine nobody dares cut.
+          Most companies run on rules nobody questions anymore — layers of jungle vine nobody dares cut. We audit your operations, cut the waste, and deploy specialized AI agents to run what's left.
         </h3>
         <h2 ref={text2Ref} className="font-serif italic text-4xl md:text-7xl lg:text-8xl text-text leading-tight">
           We focus on <br /><span className="text-accent relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-px after:bg-accent/40">removing the chaos.</span>
@@ -1010,8 +1010,13 @@ function Footer() {
     <footer className="w-full bg-[#050508] pt-24 pb-12 px-6 md:px-12 rounded-t-[4rem] border-t border-muted relative z-30">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-12">
         <div className="flex flex-col gap-6">
-          <span className="font-sans font-bold text-3xl tracking-tight text-text">Habomic</span>
-          <p className="text-text/50 max-w-xs text-sm">We clear the jungle from your business, then let the monkeys run what's left.</p>
+          <div className="flex flex-col">
+            <span className="font-sans font-bold text-3xl tracking-tight text-text">Habomic</span>
+            <span className="font-mono text-[10px] text-text/30 mt-1 uppercase tracking-wider" title="Hire A Bunch Of Monkeys Its Cheaper">
+              *Hire A Bunch Of Monkeys Its Cheaper
+            </span>
+          </div>
+          <p className="text-text/50 max-w-xs text-sm">We remove the chaos from your business, then let AI run what's left.</p>
           <div className="flex flex-col gap-1 mt-2 text-sm text-text/60">
             <a href="mailto:Apollo.303@outlook.com" className="hover:text-accent transition-colors">Apollo.303@outlook.com</a>
             <a href="mailto:omarabouelouafa303@gmail.com" className="hover:text-accent transition-colors">omarabouelouafa303@gmail.com</a>
