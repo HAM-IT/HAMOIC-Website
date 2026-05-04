@@ -48,6 +48,7 @@ export default function App() {
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -59,35 +60,65 @@ function Navbar() {
   }, []);
 
   return (
-    <header
-      ref={navRef}
-      className={cn(
-        "fixed top-4 left-1/2 -translate-x-1/2 z-40 transition-all duration-500 ease-in-out py-3 px-6 rounded-full flex items-center justify-between w-[90%] max-w-5xl",
-        scrolled
-          ? "bg-surface/60 backdrop-blur-xl border border-muted shadow-2xl"
-          : "bg-transparent border border-transparent"
-      )}
-    >
-      <div className="flex items-center gap-2">
-        <img src="/logo-monkey.png" alt="Company Logo" className="h-9 md:h-10 w-auto opacity-95 hover:opacity-100 hover:scale-[1.02] transition-all drop-shadow-lg" />
-      </div>
+    <>
+      <header
+        ref={navRef}
+        className={cn(
+          "fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out py-3 px-6 rounded-full flex items-center justify-between w-[90%] max-w-5xl",
+          scrolled || mobileMenuOpen
+            ? "bg-surface/60 backdrop-blur-xl border border-muted shadow-2xl"
+            : "bg-transparent border border-transparent"
+        )}
+      >
+        <div className="flex items-center gap-2">
+          <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }} className="cursor-pointer flex items-center">
+            <img src="/logo-monkey.png" alt="Company Logo" className="h-9 md:h-10 w-auto opacity-95 hover:opacity-100 hover:scale-[1.02] transition-all drop-shadow-lg" />
+          </a>
+        </div>
 
-      <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-8">
+          {['Process', 'Manifesto', 'Tools', 'About', 'Protocol'].map((link) => (
+            <a key={link} href={`#${link.toLowerCase()}`} className="text-sm font-medium text-text/70 hover:text-text transition-colors hover:-translate-y-px duration-300">
+              {link}
+            </a>
+          ))}
+        </nav>
+
+        <MagneticButton href="https://calendar.app.google/5VyFxPm4kGYtdeng9" target="_blank" rel="noopener noreferrer" className="hidden md:flex bg-accent text-background border border-accent/20 font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-accent/90">
+          Book an Audit
+        </MagneticButton>
+
+        <button className="md:hidden text-text p-1 relative z-50" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </header>
+
+      {/* Mobile Menu Overlay */}
+      <div className={cn(
+        "fixed inset-0 bg-[#050508]/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8 transition-all duration-300 md:hidden",
+        mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+      )}>
         {['Process', 'Manifesto', 'Tools', 'About', 'Protocol'].map((link) => (
-          <a key={link} href={`#${link.toLowerCase()}`} className="text-sm font-medium text-text/70 hover:text-text transition-colors hover:-translate-y-px duration-300">
+          <a
+            key={link}
+            href={`#${link.toLowerCase()}`}
+            onClick={() => setMobileMenuOpen(false)}
+            className="text-2xl font-sans font-bold text-text hover:text-accent transition-colors"
+          >
             {link}
           </a>
         ))}
-      </nav>
-
-      <MagneticButton href="https://calendar.app.google/5VyFxPm4kGYtdeng9" target="_blank" rel="noopener noreferrer" className="hidden md:flex bg-accent text-background border border-accent/20 font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-accent/90">
-        Book an Audit
-      </MagneticButton>
-
-      <button className="md:hidden text-text">
-        <Menu size={24} />
-      </button>
-    </header>
+        <a
+          href="https://calendar.app.google/5VyFxPm4kGYtdeng9"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => setMobileMenuOpen(false)}
+          className="mt-4 bg-accent text-background font-semibold px-8 py-3 rounded-full"
+        >
+          Book an Audit
+        </a>
+      </div>
+    </>
   );
 }
 
@@ -109,7 +140,7 @@ function HeroSection() {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative w-full h-[100dvh] flex flex-col justify-end px-6 pb-6 md:px-16 md:pb-12 lg:px-24 lg:pb-16 overflow-hidden will-change-transform" style={{ transform: 'translateZ(0)' }}>
+    <section ref={heroRef} className="relative w-full min-h-[100dvh] flex flex-col justify-end pt-32 px-6 pb-6 md:px-16 md:pb-12 lg:px-24 lg:pb-16 overflow-hidden will-change-transform" style={{ transform: 'translateZ(0)' }}>
       <div className="absolute inset-0 z-0 will-change-transform" style={{ transform: 'translate3d(0,0,0)' }}>
         <img
           src="/hero-nascar-final.png"
@@ -117,18 +148,18 @@ function HeroSection() {
           className="w-full h-full object-cover object-center" style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
         />
         {/* Adjusted gradient: clear at the top, fading to dark at the bottom for text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent h-1/2 mt-auto" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent h-[60%] mt-auto" />
       </div>
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-start gap-6 pb-4" style={{ transform: 'translateZ(0)' }}>
+      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-start gap-6 pb-4 md:pb-4" style={{ transform: 'translateZ(0)' }}>
         {/* Soft, targeted fog behind text to ensure crisp readability against the high-quality image */}
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-background via-background/80 to-transparent blur-3xl -m-16 rounded-[4rem] opacity-90 pointer-events-none" />
 
         <div className="flex flex-col gap-2 relative z-10">
-          <h1 ref={title1Ref} className="font-sans font-bold text-3xl md:text-5xl lg:text-6xl text-text tracking-tight drop-shadow-md">
+          <h1 ref={title1Ref} className="font-sans font-bold text-4xl sm:text-5xl lg:text-6xl text-text tracking-tight drop-shadow-md">
             AI where it matters.
           </h1>
-          <h2 ref={title2Ref} className="font-serif italic text-6xl md:text-8xl lg:text-[9rem] text-accent leading-[0.85] tracking-tight pr-4 drop-shadow-lg">
+          <h2 ref={title2Ref} className="font-serif italic text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] text-accent leading-[0.85] tracking-tight pr-4 drop-shadow-lg">
             Humans where it counts.
           </h2>
         </div>
@@ -374,45 +405,67 @@ function ProtocolSection() {
   const containerRef = useRef(null);
 
   useEffect(() => {
+    let mm = gsap.matchMedia();
     const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray('.protocol-card');
+      
+      mm.add("(min-width: 768px)", () => {
+        const cards = gsap.utils.toArray('.protocol-card');
+        cards.forEach((card, i) => {
+          if (i < cards.length - 1) {
+            ScrollTrigger.create({
+              trigger: card,
+              start: "top top",
+              endTrigger: ".protocol-container",
+              end: "bottom bottom",
+              pin: true,
+              pinSpacing: false,
+              id: `card-${i}`
+            });
 
-      cards.forEach((card, i) => {
-        if (i < cards.length - 1) {
-          ScrollTrigger.create({
-            trigger: card,
-            start: "top top",
-            endTrigger: ".protocol-container",
-            end: "bottom bottom",
-            pin: true,
-            pinSpacing: false,
-            id: `card-${i}`
-          });
+            gsap.to(card, {
+              scale: 0.9,
+              opacity: 0.3,
+              filter: "blur(10px)",
+              scrollTrigger: {
+                trigger: cards[i + 1],
+                start: "top bottom",
+                end: "top top",
+                scrub: true,
+              }
+            });
+          } else {
+            ScrollTrigger.create({
+              trigger: card,
+              start: "top top",
+              endTrigger: ".protocol-container",
+              end: "bottom bottom",
+              pin: true,
+              pinSpacing: false,
+            });
+          }
+        });
+      });
 
-          gsap.to(card, {
-            scale: 0.9,
-            opacity: 0.3,
-            filter: "blur(10px)",
+      mm.add("(max-width: 767px)", () => {
+        const cards = gsap.utils.toArray('.protocol-card');
+        cards.forEach((card) => {
+          gsap.from(card, {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
             scrollTrigger: {
-              trigger: cards[i + 1],
-              start: "top bottom",
-              end: "top top",
-              scrub: true,
+              trigger: card,
+              start: "top 80%",
             }
           });
-        } else {
-          ScrollTrigger.create({
-            trigger: card,
-            start: "top top",
-            endTrigger: ".protocol-container",
-            end: "bottom bottom",
-            pin: true,
-            pinSpacing: false,
-          });
-        }
+        });
       });
+
     }, containerRef);
-    return () => ctx.revert();
+    return () => {
+      mm.revert();
+      ctx.revert();
+    };
   }, []);
 
   const protocols = [
@@ -437,10 +490,10 @@ function ProtocolSection() {
   ];
 
   return (
-    <section id="protocol" className="w-full bg-[#050508] protocol-container pb-[100vh]" ref={containerRef}>
+    <section id="protocol" className="w-full bg-[#050508] protocol-container md:pb-[100vh] py-20 md:py-0" ref={containerRef}>
       {protocols.map((p, i) => (
-        <div key={i} className="protocol-card w-full h-[100dvh] sticky top-0 flex items-center justify-center p-4 md:p-8 will-change-transform">
-          <div className="w-full max-w-5xl h-full max-h-[680px] bg-surface border border-muted rounded-[2.5rem] relative overflow-hidden flex flex-col md:flex-row shadow-2xl">
+        <div key={i} className="protocol-card w-full md:h-[100dvh] md:sticky top-0 flex items-center justify-center p-4 md:p-8 will-change-transform mb-8 md:mb-0">
+          <div className="w-full max-w-5xl min-h-[500px] md:h-full md:max-h-[680px] bg-surface border border-muted rounded-[2.5rem] relative overflow-hidden flex flex-col md:flex-row shadow-2xl">
 
             {/* Content Side */}
             <div className="flex-1 p-8 md:p-14 flex flex-col justify-center gap-6 relative z-10">
