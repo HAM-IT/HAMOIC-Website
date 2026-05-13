@@ -364,24 +364,24 @@ function PhilosophySection() {
 
   const beliefs = [
     {
+      num: "01",
       title: "Question Everything",
-      desc: "We don't assume you need AI. You probably need organization first.",
-      accent: "border-accent/40"
+      desc: "We don't assume you need AI. You probably need organization first."
     },
     {
+      num: "02",
       title: "Process Over Tech",
-      desc: "Most of your problems aren't tech problems. They're process problems.",
-      accent: "border-blue-400/40"
+      desc: "Most of your problems aren't tech problems. They're process problems."
     },
     {
+      num: "03",
       title: "Humans Decide",
-      desc: "Humans make the decisions. Monkeys handle the repetition.",
-      accent: "border-green-400/40"
+      desc: "Humans make the decisions. Monkeys handle the repetition."
     },
     {
+      num: "04",
       title: "Earn Your Place",
-      desc: "If it doesn't add value, cut it. Every process, tool, and meeting must justify itself.",
-      accent: "border-red-400/40"
+      desc: "If it doesn't add value, cut it. Every process, tool, and meeting must justify itself."
     }
   ];
 
@@ -414,12 +414,13 @@ function PhilosophySection() {
       <div className="relative z-10 max-w-5xl mx-auto flex flex-col gap-16">
         {/* Intro */}
         <div ref={introRef} className="flex flex-col gap-6 max-w-2xl">
-          <h3 className="font-sans text-accent font-semibold tracking-wide uppercase text-sm">🐒 What We Believe</h3>
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-muted/50 bg-surface/30 w-fit backdrop-blur-sm">
+            <span className="text-base">🐒</span>
+            <span className="font-mono text-xs text-accent uppercase tracking-widest font-semibold">What We Believe</span>
+          </div>
           <h2 className="font-serif italic text-4xl md:text-6xl text-text leading-tight">Our Manifesto</h2>
-          <p className="text-text/50 text-lg leading-relaxed">
+          <p className="text-text/60 text-lg leading-relaxed">
             Most companies run on rules nobody questions anymore.
-          </p>
-          <p className="text-text/50 text-lg leading-relaxed">
             We audit your operations, cut the waste, and build what actually works. Here's what we believe:
           </p>
         </div>
@@ -427,9 +428,14 @@ function PhilosophySection() {
         {/* Belief Cards */}
         <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {beliefs.map((b) => (
-            <div key={b.title} className={`belief-card bg-surface border-l-4 ${b.accent} border border-muted rounded-2xl p-8 flex flex-col gap-4 hover:border-muted/80 transition-colors duration-300`}>
-              <h4 className="font-sans font-bold text-xl text-text">{b.title}</h4>
-              <p className="text-text/55 text-base leading-relaxed">{b.desc}</p>
+            <div key={b.title} className="belief-card bg-surface/50 backdrop-blur-sm border border-muted/50 rounded-2xl p-8 flex flex-col gap-6 hover:border-accent/40 transition-colors duration-300 group">
+              <span className="font-mono text-4xl text-accent/20 group-hover:text-accent/40 transition-colors duration-300">
+                {b.num}
+              </span>
+              <div className="flex flex-col gap-2">
+                <h4 className="font-sans font-bold text-2xl text-text">{b.title}</h4>
+                <p className="text-text/60 text-base leading-relaxed">{b.desc}</p>
+              </div>
             </div>
           ))}
         </div>
