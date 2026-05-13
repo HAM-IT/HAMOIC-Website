@@ -85,7 +85,7 @@ function Navbar() {
         </nav>
 
         <MagneticButton href="https://calendar.app.google/5VyFxPm4kGYtdeng9" target="_blank" rel="noopener noreferrer" className="hidden md:flex bg-accent text-background border border-accent/20 font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-accent/90">
-          Book an Audit
+          Let's Question Everything
         </MagneticButton>
 
         <button className="md:hidden text-text p-1 relative z-50" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -115,7 +115,7 @@ function Navbar() {
           onClick={() => setMobileMenuOpen(false)}
           className="mt-4 bg-accent text-background font-semibold px-8 py-3 rounded-full"
         >
-          Book an Audit
+          Let's Question Everything
         </a>
       </div>
     </>
@@ -157,17 +157,17 @@ function HeroSection() {
 
         <div className="flex flex-col gap-2 relative z-10">
           <h1 ref={title1Ref} className="font-sans font-bold text-4xl sm:text-5xl lg:text-6xl text-text tracking-tight drop-shadow-md">
-            AI where it matters.
+            Most companies don't need AI. They need to get organized.
           </h1>
-          <h2 ref={title2Ref} className="font-serif italic text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] text-accent leading-[0.85] tracking-tight pr-4 drop-shadow-lg">
-            Humans where it counts.
+          <h2 ref={title2Ref} className="font-serif italic text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-accent leading-[0.9] tracking-tight pr-4 drop-shadow-lg">
+            We start by fixing your foundation. Everything else comes after.
           </h2>
         </div>
 
         <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 mt-8">
           <MagneticButton href="https://calendar.app.google/5VyFxPm4kGYtdeng9" target="_blank" rel="noopener noreferrer" className="bg-accent text-background px-8 py-4 rounded-full font-sans font-semibold text-lg flex items-center justify-center gap-2 group overflow-hidden relative">
             <span className="relative z-10 flex items-center gap-2">
-              Book an Audit <ArrowRight size={20} className="group-hover:translate-x-1 duration-300" />
+              Let's Question Everything <ArrowRight size={20} className="group-hover:translate-x-1 duration-300" />
             </span>
           </MagneticButton>
           <div className="px-6 py-4 flex items-center justify-center gap-3 border border-muted rounded-full bg-surface/30 backdrop-blur-sm">
@@ -227,7 +227,7 @@ function DiagnosticShufflerCard() {
         <h4 className="font-sans font-bold text-xl mb-2 flex items-center gap-3">
           <X className="text-red-400" size={20} /> Eliminate Waste
         </h4>
-        <p className="text-text/60 text-sm">The troop spots the dead weight. Every process must justify its existence.</p>
+        <p className="text-text/60 text-sm">We question every process. If it doesn't add value, it's gone. Everything must justify itself.</p>
       </div>
 
       <div className="flex-1 relative flex items-center justify-center w-full">
@@ -277,7 +277,7 @@ function TelemetryTypewriterCard() {
           <h4 className="font-sans font-bold text-xl mb-2 flex items-center gap-2">
             <Layers className="text-accent" size={20} /> Simplify & Structure
           </h4>
-          <p className="text-text/60 text-sm">Organizing operations and pipelines into transparent systems.</p>
+          <p className="text-text/60 text-sm">We build clear workflows and document everything. No more processes that live in people's heads.</p>
         </div>
         <div className="flex items-center gap-2 bg-background px-3 py-1 rounded-full border border-muted">
           <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
@@ -319,9 +319,9 @@ function CursorProtocolCard() {
     <div className="bg-surface border border-muted rounded-3xl p-8 flex flex-col gap-8 h-[400px] shadow-2xl relative overflow-hidden">
       <div>
         <h4 className="font-sans font-bold text-xl mb-2 flex items-center gap-2">
-          <Bot className="text-blue-400" size={20} /> AI Automation
+          <Bot className="text-blue-400" size={20} /> AI Automation (If Needed)
         </h4>
-        <p className="text-text/60 text-sm">You focus on decisions — the monkeys handle the repetitive work.</p>
+        <p className="text-text/60 text-sm">Only then do we consider if AI actually helps. Most companies don't need it.</p>
       </div>
 
       <div className="flex-1 relative flex flex-col justify-center items-center gap-6 mt-4">
@@ -390,7 +390,10 @@ function PhilosophySection() {
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto flex flex-col gap-12 text-center">
-        <h3 ref={text1Ref} className="font-sans text-xl md:text-2xl text-text/60 max-w-2xl mx-auto leading-relaxed">
+        <p ref={text1Ref} className="font-sans text-lg md:text-xl text-text/50 max-w-3xl mx-auto leading-relaxed">
+          We believe in AI as revolutionary technology, but we also believe it can't do everything. Most businesses need something more basic—organization, systems, and clarity. Here's how we think:
+        </p>
+        <h3 className="font-sans text-xl md:text-2xl text-text/60 max-w-2xl mx-auto leading-relaxed">
           Most companies run on rules nobody questions anymore — layers of jungle vine nobody dares cut. We audit your operations, cut the waste, and deploy specialized AI agents to run what's left.
         </h3>
         <h2 ref={text2Ref} className="font-serif italic text-4xl md:text-7xl lg:text-8xl text-text leading-tight">
@@ -472,7 +475,7 @@ function ProtocolSection() {
     {
       step: "01",
       title: "Question Everything",
-      desc: "The troop inspects every vine. Useless reports, redundant workflows — if it doesn't serve the mission, it gets cut. Clarity before change.",
+      desc: "We don't assume you need technology. We ask hard questions first. Useless reports, redundant workflows — if it doesn't serve the mission, it gets cut. Clarity before change.",
       graphic: <GeometricGraphic />
     },
     {
@@ -833,14 +836,14 @@ function ToolsSection() {
         {/* Header */}
         <div ref={headerRef} className="flex flex-col gap-4 max-w-2xl">
           <h3 className="font-sans text-accent font-semibold tracking-wide uppercase text-sm flex items-center gap-2">
-            🍌 Monkey Tools
+            🍌 Utilities We Build
           </h3>
           <h2 className="font-serif italic text-4xl md:text-6xl text-text leading-tight">
             Built by humans.<br />
             <span className="text-accent">Run by AI.</span>
           </h2>
           <p className="text-text/50 text-lg max-w-lg leading-relaxed">
-            We deploy our 'monkeys' into specialized utilities designed to strip the friction out of your daily workflows. Select an artifact below to begin.
+            We don't sell tools. We build what you actually need. These are examples of utilities we've created:
           </p>
         </div>
 
