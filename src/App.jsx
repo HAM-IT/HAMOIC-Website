@@ -893,12 +893,20 @@ function ToolsSection() {
 
           {/* Coming Soon Utilities */}
           {[
-            { name: 'CRM Auto-Sync', desc: 'Automatic data sync between your CRM, spreadsheets, and pipelines. No manual entry.', icon: '🔄' },
-            { name: 'Report Killer', desc: 'Eliminates reports nobody reads. Replaces them with live dashboards that update themselves.', icon: '📊' },
+            { 
+              name: 'Silverback ERP', 
+              desc: 'A lightweight, intelligent ERP that lives inside your Google Sheets. No bloated software, just smart, connected data that scales with your troop.', 
+              icon: <img src="/silverback.png" alt="Silverback" className="w-8 h-8 object-contain opacity-80" /> 
+            },
+            { 
+              name: 'CRM Auto-Sync', 
+              desc: 'Automatic data sync between your CRM, spreadsheets, and pipelines. No manual entry.', 
+              icon: <span className="text-2xl">🔄</span> 
+            },
           ].map((tool) => (
             <div key={tool.name} className="bg-surface border border-muted/50 rounded-2xl p-8 flex flex-col gap-5 relative overflow-hidden hover:border-muted/70 transition-colors duration-300">
               <div className="flex items-center justify-between">
-                <span className="text-2xl">{tool.icon}</span>
+                <div>{tool.icon}</div>
                 <span className="font-mono text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full bg-muted/20 text-text/30 border border-muted/30">Coming Soon</span>
               </div>
               <h4 className="font-sans font-bold text-lg text-text">{tool.name}</h4>
