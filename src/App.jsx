@@ -896,7 +896,7 @@ function ToolsSection() {
             { 
               name: 'Silverback ERP', 
               desc: 'A lightweight, intelligent ERP that lives inside your Google Sheets. No bloated software, just smart, connected data that scales with your troop.', 
-              icon: <img src="/silverback.png" alt="Silverback" className="w-8 h-8 object-contain opacity-80" /> 
+              icon: <img src="/silverback.png" alt="Silverback" className="w-16 h-16 md:w-20 md:h-20 object-contain mix-blend-screen -ml-2" /> 
             },
             { 
               name: 'CRM Auto-Sync', 
