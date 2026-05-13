@@ -188,7 +188,7 @@ function FeaturesSection() {
       <div className="max-w-6xl mx-auto flex flex-col gap-20">
         <div className="flex flex-col gap-4 max-w-2xl">
           <h3 className="font-sans text-accent font-semibold tracking-wide uppercase text-sm">🐒 The Process</h3>
-          <h2 className="font-serif italic text-4xl md:text-6xl text-text">How the Troop Works</h2>
+          <h2 className="font-serif italic text-4xl md:text-6xl text-text">How We Work</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -204,7 +204,7 @@ function FeaturesSection() {
 // Card 1: Diagnostic Shuffler (Waste Elimination)
 function DiagnosticShufflerCard() {
   const [cards, setCards] = useState([
-    { id: 1, text: "Useless Reports" },
+    { id: 1, text: "Reports Nobody Reads" },
     { id: 2, text: "Redundant Data" },
     { id: 3, text: "Outdated Procedures" }
   ]);
@@ -359,27 +359,49 @@ function CursorProtocolCard() {
 
 function PhilosophySection() {
   const containerRef = useRef(null);
-  const text1Ref = useRef(null);
-  const text2Ref = useRef(null);
+  const introRef = useRef(null);
+  const cardsRef = useRef(null);
+
+  const beliefs = [
+    {
+      title: "Question Everything",
+      desc: "We don't assume you need AI. You probably need organization first.",
+      accent: "border-accent/40"
+    },
+    {
+      title: "Process Over Tech",
+      desc: "Most of your problems aren't tech problems. They're process problems.",
+      accent: "border-blue-400/40"
+    },
+    {
+      title: "Humans Decide",
+      desc: "Humans make the decisions. Monkeys handle the repetition.",
+      accent: "border-green-400/40"
+    },
+    {
+      title: "Earn Your Place",
+      desc: "If it doesn't add value, cut it. Every process, tool, and meeting must justify itself.",
+      accent: "border-red-400/40"
+    }
+  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 60%",
-          end: "bottom 30%",
-          toggleActions: "play none none reverse"
-        }
+      gsap.fromTo(introRef.current, { opacity: 0, y: 20 }, {
+        opacity: 1, y: 0, duration: 0.8, ease: "power2.out",
+        scrollTrigger: { trigger: introRef.current, start: "top 75%" }
       });
-      tl.fromTo(text1Ref.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
-        .fromTo(text2Ref.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, ease: "power3.out" }, "-=0.4");
+      const cards = gsap.utils.toArray('.belief-card');
+      gsap.fromTo(cards, { opacity: 0, y: 30 }, {
+        opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.12,
+        scrollTrigger: { trigger: cardsRef.current, start: "top 75%" }
+      });
     }, containerRef);
     return () => ctx.revert();
   }, []);
 
   return (
-    <section id="manifesto" ref={containerRef} className="w-full py-40 px-6 relative bg-background flex flex-col items-center justify-center overflow-hidden">
+    <section id="manifesto" ref={containerRef} className="w-full py-32 md:py-40 px-6 relative bg-background overflow-hidden">
       <div className="absolute inset-0 z-0 opacity-20">
         <img
           src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2574&auto=format&fit=crop"
@@ -389,16 +411,28 @@ function PhilosophySection() {
         <div className="absolute inset-0 bg-background/80" />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto flex flex-col gap-12 text-center">
-        <p ref={text1Ref} className="font-sans text-lg md:text-xl text-text/50 max-w-3xl mx-auto leading-relaxed">
-          We believe in AI as revolutionary technology, but we also believe it can't do everything. Most businesses need something more basic—organization, systems, and clarity. Here's how we think:
-        </p>
-        <h3 className="font-sans text-xl md:text-2xl text-text/60 max-w-2xl mx-auto leading-relaxed">
-          Most companies run on rules nobody questions anymore — layers of jungle vine nobody dares cut. We audit your operations, cut the waste, and deploy specialized AI agents to run what's left.
-        </h3>
-        <h2 ref={text2Ref} className="font-serif italic text-4xl md:text-7xl lg:text-8xl text-text leading-tight">
-          We focus on <br /><span className="text-accent relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-px after:bg-accent/40">removing the chaos.</span>
-        </h2>
+      <div className="relative z-10 max-w-5xl mx-auto flex flex-col gap-16">
+        {/* Intro */}
+        <div ref={introRef} className="flex flex-col gap-6 max-w-2xl">
+          <h3 className="font-sans text-accent font-semibold tracking-wide uppercase text-sm">🐒 What We Believe</h3>
+          <h2 className="font-serif italic text-4xl md:text-6xl text-text leading-tight">Our Manifesto</h2>
+          <p className="text-text/50 text-lg leading-relaxed">
+            Most companies run on rules nobody questions anymore.
+          </p>
+          <p className="text-text/50 text-lg leading-relaxed">
+            We audit your operations, cut the waste, and build what actually works. Here's what we believe:
+          </p>
+        </div>
+
+        {/* Belief Cards */}
+        <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {beliefs.map((b) => (
+            <div key={b.title} className={`belief-card bg-surface border-l-4 ${b.accent} border border-muted rounded-2xl p-8 flex flex-col gap-4 hover:border-muted/80 transition-colors duration-300`}>
+              <h4 className="font-sans font-bold text-xl text-text">{b.title}</h4>
+              <p className="text-text/55 text-base leading-relaxed">{b.desc}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -828,41 +862,47 @@ function ToolsSection() {
 
   return (
     <section id="tools" ref={sectionRef} className="w-full py-32 px-6 md:px-12 bg-[#050508] relative z-10 overflow-hidden">
-      {/* Banana‑glow ambient orb */}
-      <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%)' }} />
+      {/* Ambient orb */}
+      <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%)' }} />
 
-      <div className="max-w-6xl mx-auto flex flex-col gap-16">
+      <div className="max-w-6xl mx-auto flex flex-col gap-14">
 
         {/* Header */}
         <div ref={headerRef} className="flex flex-col gap-4 max-w-2xl">
           <h3 className="font-sans text-accent font-semibold tracking-wide uppercase text-sm flex items-center gap-2">
-            🍌 Utilities We Build
+            🍌 Example Utilities
           </h3>
-          <h2 className="font-serif italic text-4xl md:text-6xl text-text leading-tight">
-            Built by humans.<br />
-            <span className="text-accent">Run by AI.</span>
+          <h2 className="font-serif italic text-4xl md:text-5xl text-text leading-tight">
+            Built by humans. <span className="text-accent">Run by AI.</span>
           </h2>
-          <p className="text-text/50 text-lg max-w-lg leading-relaxed">
-            We don't sell tools. We build what you actually need. These are examples of utilities we've created:
+          <p className="text-text/50 text-base max-w-xl leading-relaxed">
+            We don't sell off-the-shelf software. We build utilities tailored to what you actually need. MonkeyFill is an example — a tool we created because a client needed it. Here's what we can build:
           </p>
         </div>
 
-        {/* Tool Card — MonkeyFill */}
-        <div ref={cardRef} className="relative">
+        {/* Portfolio Grid */}
+        <div ref={cardRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* MonkeyFill — Live */}
           <MonkeyFillCard />
+
+          {/* Coming Soon Utilities */}
+          {[
+            { name: 'CRM Auto-Sync', desc: 'Automatic data sync between your CRM, spreadsheets, and pipelines. No manual entry.', icon: '🔄' },
+            { name: 'Report Killer', desc: 'Eliminates reports nobody reads. Replaces them with live dashboards that update themselves.', icon: '📊' },
+          ].map((tool) => (
+            <div key={tool.name} className="bg-surface border border-muted/50 rounded-2xl p-8 flex flex-col gap-5 relative overflow-hidden hover:border-muted/70 transition-colors duration-300">
+              <div className="flex items-center justify-between">
+                <span className="text-2xl">{tool.icon}</span>
+                <span className="font-mono text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full bg-muted/20 text-text/30 border border-muted/30">Coming Soon</span>
+              </div>
+              <h4 className="font-sans font-bold text-lg text-text">{tool.name}</h4>
+              <p className="text-text/45 text-sm leading-relaxed">{tool.desc}</p>
+            </div>
+          ))}
         </div>
 
-        {/* Coming Soon Tease */}
-        <div className="flex items-center gap-4">
-          <div className="flex gap-3">
-            {['Monkey CRM Sync', 'Monkey Report Killer', 'Monkey Inbox Zero'].map((name) => (
-              <div key={name} className="border border-muted/40 rounded-full px-4 py-2 text-xs font-mono text-text/30 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-muted/40 inline-block" />
-                {name} — Soon
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* More coming label */}
+        <p className="text-text/25 text-sm font-mono text-center">More utilities in development — each one built for a specific client need.</p>
 
       </div>
     </section>
@@ -870,190 +910,53 @@ function ToolsSection() {
 }
 
 function MonkeyFillCard() {
-  const [hovered, setHovered] = useState(false);
-
-  const features = [
-    { icon: '🎯', label: 'CV ↔ Job matching', desc: 'AI reads the job offer and rewrites your CV to match it precisely.' },
-    { icon: '⚡', label: 'One-click PDF export', desc: 'Generates a clean, recruiter-ready PDF directly in your browser.' },
-    { icon: '🔒', label: 'Privacy-first', desc: 'Nothing is stored. Your data never leaves your session.' },
-    { icon: '🍌', label: '5 free uses / day', desc: 'Try it daily, no account needed during the beta.' },
-  ];
-
   return (
-    <div
-      className="relative rounded-[2.5rem] border border-muted/60 bg-surface overflow-hidden shadow-2xl transition-all duration-500"
-      style={{
-        boxShadow: hovered
-          ? '0 0 80px -20px rgba(201,168,76,0.35), 0 25px 60px -15px rgba(0,0,0,0.7)'
-          : '0 25px 60px -15px rgba(0,0,0,0.6)'
-      }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      {/* Banana stripe accent */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-accent to-transparent opacity-80" />
+    <div className="bg-surface border border-accent/30 rounded-2xl p-8 flex flex-col gap-5 relative overflow-hidden hover:border-accent/50 transition-colors duration-300">
+      {/* Top accent */}
+      <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-accent to-transparent opacity-60" />
 
-      <div className="flex flex-col lg:flex-row">
-
-        {/* LEFT — Info */}
-        <div className="flex-1 p-10 md:p-14 flex flex-col gap-8 justify-between">
-          <div className="flex flex-col gap-5">
-            {/* App identity */}
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center text-3xl shadow-inner">
-                🐒
-              </div>
-              <div>
-                <div className="flex items-center gap-3">
-                  <h3 className="font-sans font-bold text-2xl text-text">MonkeyFill</h3>
-                  <span className="font-mono text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full bg-accent/20 text-accent border border-accent/30">
-                    Beta
-                  </span>
-                </div>
-                <p className="text-text/40 text-sm font-mono">Chrome Extension · by Habomic</p>
-              </div>
-            </div>
-
-            {/* Description */}
-            <p className="text-text/70 text-lg leading-relaxed max-w-lg">
-              Stop sending the same generic CV. MonkeyFill reads any job posting and rebuilds your CV to match — tailored, sharp, and recruiter-ready in seconds.
-            </p>
-
-            {/* Feature grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
-              {features.map((f) => (
-                <div key={f.label} className="flex items-start gap-3 p-4 rounded-2xl bg-background/60 border border-muted/40 hover:border-accent/30 transition-colors duration-300">
-                  <span className="text-xl mt-0.5">{f.icon}</span>
-                  <div>
-                    <p className="font-sans font-semibold text-sm text-text">{f.label}</p>
-                    <p className="text-text/45 text-xs mt-0.5 leading-snug">{f.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center text-xl">
+            🐒
           </div>
-
-          {/* CTA */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-2">
-            <a
-              href="https://github.com/HAM-IT/MonkeyFill-Extention/releases/latest"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 bg-accent text-background px-7 py-3.5 rounded-full font-sans font-bold text-base hover:bg-accent/90 transition-all duration-300 shadow-lg hover:shadow-accent/30 hover:-translate-y-0.5 active:scale-95"
-            >
-              <span>🍌 Download Beta</span>
-              <ArrowUpRight size={18} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-            </a>
-            <p className="text-text/35 text-xs font-mono leading-relaxed">
-              Free · Chrome · No account required
-            </p>
-          </div>
-
-          {/* Beta disclaimer */}
-          <div className="flex items-start gap-2.5 p-4 rounded-2xl border border-muted/30 bg-background/40">
-            <span className="text-base mt-0.5">⚠️</span>
-            <p className="text-text/40 text-xs leading-relaxed">
-              MonkeyFill is in public beta. Expect rough edges — and feel free to send feedback. A premium tier is coming soon with unlimited daily uses.
-            </p>
+          <div>
+            <h4 className="font-sans font-bold text-lg text-text">MonkeyFill</h4>
+            <p className="text-text/35 text-xs font-mono">Chrome Extension</p>
           </div>
         </div>
-
-        {/* RIGHT — Animated Preview */}
-        <div className="lg:w-[420px] border-t lg:border-t-0 lg:border-l border-muted/40 bg-[#09090D]/80 flex items-center justify-center p-10 relative overflow-hidden min-h-[400px]">
-          <MonkeyFillPreview />
-        </div>
-
+        <span className="font-mono text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full bg-accent/20 text-accent border border-accent/30">Live</span>
       </div>
+
+      <p className="text-text/55 text-sm leading-relaxed">
+        Reads any job posting and rebuilds your CV to match — tailored, sharp, and recruiter-ready in seconds. Built because a client needed it.
+      </p>
+
+      <div className="flex flex-wrap gap-2">
+        {['CV Matching', 'PDF Export', 'Privacy-first', 'Free Beta'].map((tag) => (
+          <span key={tag} className="text-[11px] font-mono text-text/35 border border-muted/40 rounded-full px-3 py-1">{tag}</span>
+        ))}
+      </div>
+
+      <a
+        href="https://github.com/HAM-IT/MonkeyFill-Extention/releases/latest"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group flex items-center gap-2 text-accent text-sm font-sans font-semibold hover:text-accent/80 transition-colors w-fit mt-1"
+      >
+        Try it free <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+      </a>
     </div>
   );
 }
 
-function MonkeyFillPreview() {
-  const containerRef = useRef(null);
-  const [step, setStep] = useState(0);
-
-  const steps = [
-    { label: 'Monkey scanning offer...', color: '#C9A84C', icon: '📄' },
-    { label: 'Analysing your CV...', color: '#7B9EE0', icon: '🧠' },
-    { label: 'Tailoring content...', color: '#C9A84C', icon: '✍️' },
-    { label: 'Banana delivered! 🍌', color: '#4CAF80', icon: '✅' },
-  ];
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setStep((s) => (s + 1) % steps.length);
-    }, 1800);
-    return () => clearInterval(id);
-  }, []);
-
-  const current = steps[step];
-
-  return (
-    <div ref={containerRef} className="w-full flex flex-col items-center gap-6">
-      {/* Mock extension popup */}
-      <div className="w-[220px] rounded-2xl border border-muted/50 bg-[#13131A] overflow-hidden shadow-2xl">
-        {/* Popup header */}
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-muted/30 bg-[#09090D]">
-          <span className="text-base">🐒</span>
-          <span className="font-sans font-bold text-sm text-text">MonkeyFill</span>
-          <span className="ml-auto text-[9px] font-mono text-accent/70 border border-accent/20 px-1.5 py-0.5 rounded-full">BETA</span>
-        </div>
-
-        {/* Status line */}
-        <div className="px-4 py-4 flex flex-col gap-3">
-          <div
-            className="flex items-center gap-2 rounded-xl px-3 py-2.5 transition-all duration-500"
-            style={{ backgroundColor: current.color + '18', border: `1px solid ${current.color}40` }}
-          >
-            <span className="text-base transition-all duration-300">{current.icon}</span>
-            <span className="font-mono text-[11px] transition-all duration-300" style={{ color: current.color }}>
-              {current.label}
-            </span>
-          </div>
-
-          {/* Progress dots */}
-          <div className="flex items-center justify-center gap-1.5 mt-1">
-            {steps.map((_, i) => (
-              <div
-                key={i}
-                className="rounded-full transition-all duration-400"
-                style={{
-                  width: i === step ? 16 : 6,
-                  height: 6,
-                  backgroundColor: i === step ? current.color : '#2A2A35'
-                }}
-              />
-            ))}
-          </div>
-
-          {/* Mock CV lines */}
-          <div className="flex flex-col gap-1.5 mt-1">
-            {[100, 80, 90, 60, 75].map((w, i) => (
-              <div
-                key={i}
-                className="h-1.5 rounded-full transition-all duration-700"
-                style={{
-                  width: `${w}%`,
-                  backgroundColor: i <= step ? current.color + '60' : '#2A2A35',
-                  opacity: i <= step ? 1 : 0.4
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <p className="text-text/30 text-xs font-mono text-center">Live troop simulation</p>
-    </div>
-  );
-}
 
 function GetStartedSection() {
   return (
     <section className="w-full py-40 px-6 bg-background relative z-20 flex flex-col items-center justify-center text-center">
       <div className="max-w-3xl flex flex-col items-center gap-8">
-        <h2 className="font-sans font-bold text-5xl md:text-7xl text-text tracking-tight">Ready to unleash the troop?</h2>
-        <p className="font-serif italic text-2xl text-text/60">A leaner operation. Scaled by monkeys.</p>
+        <h2 className="font-sans font-bold text-5xl md:text-7xl text-text tracking-tight">Ready to question everything?</h2>
+        <p className="font-serif italic text-2xl text-text/60">Start with the hard work. The results follow.</p>
 
         <AliveBookingButton href="https://calendar.app.google/5VyFxPm4kGYtdeng9" />
       </div>
