@@ -815,7 +815,7 @@ function AboutSection() {
               href="https://www.linkedin.com/in/omar-abou-el-ouafa-el-idrissi-0b0974237/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 bg-[#0A66C2]/15 border border-[#0A66C2]/30 text-[#0A66C2] hover:bg-[#0A66C2]/25 hover:border-[#0A66C2]/50 px-6 py-3 rounded-full font-sans font-semibold text-sm transition-all duration-300 w-fit hover:-translate-y-0.5 shadow-lg hover:shadow-[#0A66C2]/20"
+              className="group inline-flex items-center gap-3 bg-accent/15 border border-accent/30 text-accent hover:bg-accent/25 hover:border-accent/50 px-6 py-3 rounded-full font-sans font-semibold text-sm transition-all duration-300 w-fit hover:-translate-y-0.5 shadow-lg hover:shadow-accent/20"
             >
               <Linkedin size={18} />
               <span>LinkedIn</span>
